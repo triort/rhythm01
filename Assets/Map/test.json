@@ -1,0 +1,29 @@
+{
+    "meta": {
+        "title": "test",
+        "artist": "hoge",
+        "bpm": 120,
+        "startTime": 2000,
+        "endTime": 16000
+    },
+    "notes": [
+        {
+            "time": 1.23,
+            "pos_x": 0.5,
+            "pos_y": 1.2,
+            "type": 0
+        },
+        {
+            "time": 2.34,
+            "pos_x": -0.3,
+            "pos_y": 0.9,
+            "type": 0
+        },
+        {
+            "time": 3.45,
+            "pos_x": 0.0,
+            "pos_y": -1.0,
+            "type": 0
+        }
+    ]
+}
