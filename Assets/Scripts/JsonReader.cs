@@ -14,6 +14,50 @@ public class JsonReader : MonoBehaviour
     public const string FILE_PATH = "Assets/Map/test.json";
     public List<NoteData> noteDataList = new List<NoteData>();
 
+    public GameObject userCube;
+    public GameObject notePrefab;
+    private double BPM = 100.0;
+    private double startTime = 0.0;
+    private double endTime = 0.0;
+
+    public float flashDuration = 0.5f;
+
+    private float beatInterval = 1f;
+    private float timer;
+    private int precount = 0;
+    public bool mapLoaded = false;
+
+
+    void Start()
+    {
+        DataReader();
+        Debug.Log("JSON Data Read");
+        // 3秒待って譜面生成
+        Invoke(nameof(LoadMap), 3f);
+        GameStart();
+    }
+    void Update()
+    {
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            for (int i = 0; i < noteDataList.Count; i++)
+            {
+                Debug.Log($"Note {i}: time={noteDataList[i].time}, pos_x={noteDataList[i].pos_x}, pos_y={noteDataList[i].pos_y}, type={noteDataList[i].type}");
+            }
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= beatInterval)
+        {
+            precount++;
+            if (precount <= 4)
+            {
+                StartCoroutine(Flash());
+                timer -= beatInterval;
+                Debug.Log($"count: {precount}");
+            }
+        }
+    }
     private void DataReader()
     {
         string jsonString = File.ReadAllText(FILE_PATH, Encoding.UTF8);
@@ -29,20 +73,43 @@ public class JsonReader : MonoBehaviour
 
             noteDataList.Add(noteData);
         }
+        BPM = Convert.ToSingle((double)jsonData["meta"]["bpm"]);
+        startTime = Convert.ToSingle((double)jsonData["meta"]["startTime"]);
+        endTime = Convert.ToSingle((double)jsonData["meta"]["endTime"]);
+
+        Debug.Log($"BPM: {BPM}");
+        Debug.Log($"Start Time: {startTime}");
+        Debug.Log($"End Time: {endTime}");
+
+        beatInterval = 60f / (float)BPM;
+        Debug.Log($"Beat Interval: {beatInterval}");
+        mapLoaded = true;
     }
-    void Start()
+
+    void LoadMap()
     {
-        DataReader();
-        Debug.Log("JSON Data Read");
-    }
-    void Update()
-    {
-        if (Keyboard.current.fKey.wasPressedThisFrame)
+        foreach (var note in noteDataList)
         {
-            for (int i = 0; i < noteDataList.Count; i++)
-            {
-                Debug.Log($"Note {i}: time={noteDataList[i].time}, pos_x={noteDataList[i].pos_x}, pos_y={noteDataList[i].pos_y}, type={noteDataList[i].type}");
-            }
+            Instantiate(notePrefab, new Vector3(note.pos_x, note.pos_y, 0f), Quaternion.identity);
         }
     }
+
+    void GameStart()
+    {
+
+    }
+
+    void CountDown()
+    {
+
+    }
+
+    private System.Collections.IEnumerator Flash()
+    {
+        // オブジェクトを一瞬明るく
+        userCube.GetComponent<Renderer>().material.color = Color.yellow;
+        yield return new WaitForSeconds(flashDuration);
+        userCube.GetComponent<Renderer>().material.color = Color.white;
+    }
+
 }

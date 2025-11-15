@@ -2,27 +2,57 @@
     "meta": {
         "title": "test",
         "artist": "hoge",
-        "bpm": 120,
-        "startTime": 2000,
-        "endTime": 16000
+        "bpm": 120.0,
+        "startTime": 2000.0,
+        "endTime": 16000.0
     },
     "notes": [
         {
-            "time": 1.23,
-            "pos_x": 0.5,
-            "pos_y": 1.2,
+            "time": 1.0,
+            "pos_x": 2.0,
+            "pos_y": 0.0,
             "type": 0
         },
         {
-            "time": 2.34,
-            "pos_x": -0.3,
-            "pos_y": 0.9,
+            "time": 2.0,
+            "pos_x": 4.0,
+            "pos_y": 0.0,
             "type": 0
         },
         {
-            "time": 3.45,
-            "pos_x": 0.0,
-            "pos_y": -1.0,
+            "time": 3.0,
+            "pos_x": 6.0,
+            "pos_y": 0.0,
+            "type": 0
+        },
+        {
+            "time": 4.0,
+            "pos_x": 8.0,
+            "pos_y": 0.0,
+            "type": 0
+        },
+        {
+            "time": 5.0,
+            "pos_x": 10.0,
+            "pos_y": 0.0,
+            "type": 0
+        },
+        {
+            "time": 6.0,
+            "pos_x": 12.0,
+            "pos_y": 0.0,
+            "type": 0
+        },
+        {
+            "time": 7.0,
+            "pos_x": 14.0,
+            "pos_y": 0.0,
+            "type": 0
+        },
+        {
+            "time": 8.0,
+            "pos_x": 16.0,
+            "pos_y": 0.0,
             "type": 0
         }
     ]
