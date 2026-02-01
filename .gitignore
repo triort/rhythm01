@@ -58,3 +58,5 @@ crashlytics-build.properties
 
 # Ignore Windows system files
 Thumbs.db
+
+*.sln
